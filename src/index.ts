@@ -65,7 +65,7 @@ export default class AuthService {
 
         return response.json()
       });
-    }).catch((_) => {});
+    }).catch();
   }
 
   public getToken(): string {

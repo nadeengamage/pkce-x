@@ -7,6 +7,6 @@
     "target": "es5",
     "strict": false
   },
-  "include": ["src"],
+  "include": ["src/**/*.ts"],
   "exclude": ["node_modules", "**/__tests__/*"]
 }
