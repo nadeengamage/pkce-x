@@ -1,0 +1,23 @@
+# npm
+node_modules
+package-lock.json
+*.log
+*.gz
+
+# yarn
+yarn.lock
+yarn-error.log
+
+# utilities
+.vscode
+.DS_Store
+
+# Coveralls
+.nyc_output
+coverage
+
+# Benchmarking
+benchmarks/graphs
+
+# ignore additional files using core.excludesFile
+# https://git-scm.com/docs/gitignore

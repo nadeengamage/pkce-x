@@ -1,0 +1,31 @@
+{
+  "name": "@nadeengamage/pkce-x",
+  "version": "1.0.0",
+  "description": "PKCE is a security extension to OAuth 2.0 for public clients on mobile devices, designed to prevent interception of the authorisation code by a malicious application that has sneaked into the same device.",
+  "main": "src/index.js",
+  "scripts": {
+  },
+  "files": [
+    "src/*"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nadeengamage/pkce-x.git"
+  },
+  "keywords": [
+    "pkce",
+    "oauth2",
+    "oauth2-pkce",
+    "oidc",
+    "authentication"
+  ],
+  "author": "Nadeen Gamage",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nadeengamage/pkce-x/issues"
+  },
+  "homepage": "https://github.com/nadeengamage/pkce-x#readme",
+  "engines": {
+    "node": ">=12.13.0"
+  }
+}
