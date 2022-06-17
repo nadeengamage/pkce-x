@@ -1,9 +1,17 @@
 {
-  "name": "@nadeengamage/pkce-x",
+  "name": "pkce-x",
   "version": "1.0.0",
   "description": "PKCE is a security extension to OAuth 2.0 for public clients on mobile devices, designed to prevent interception of the authorisation code by a malicious application that has sneaked into the same device.",
-  "main": "src/index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
+    "build": "tsc",
+    "test": "mocha --require test/support/env --reporter spec --bail --check-leaks ./tests",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test && npm run lint",
+    "preversion": "npm run lint",
+    "version": "npm run format && git add -A src",
+    "postversion": "git push && git push --tags"
   },
   "files": [
     "src/*"
@@ -27,5 +35,8 @@
   "homepage": "https://github.com/nadeengamage/pkce-x#readme",
   "engines": {
     "node": ">=12.13.0"
+  },
+  "dependencies": {
+    "crypto-js": "^4.1.1"
   }
 }
