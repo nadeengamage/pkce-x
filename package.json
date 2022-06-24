@@ -1,6 +1,6 @@
 {
   "name": "pkce-x",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "PKCE is a security extension to OAuth 2.0 for public clients on mobile devices, designed to prevent interception of the authorisation code by a malicious application that has sneaked into the same device.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
