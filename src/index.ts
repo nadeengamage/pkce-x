@@ -28,8 +28,8 @@ export default class AuthService {
   }
 
   public async exchange(additionalParams: IObject = {}): Promise<ITokenResponse> {
-    return this.parseAuthResponseUrl(window.location.href).then((q) => {
-      return fetch(this.config.token_endpoint, {
+    return this.parseAuthResponseUrl(window.location.href).then(async (q) => {
+      const response = await fetch(this.config.token_endpoint, {
         method: 'POST',
         body: new URLSearchParams(
           Object.assign(
@@ -40,27 +40,22 @@ export default class AuthService {
               redirect_uri: this.config.redirect_uri,
               code_verifier: this.getCodeVerifier(),
             },
-            additionalParams,
-          ),
-        ),
+            additionalParams)),
         headers: this.getHeaders(),
-      }).then((response) => {
-        if (response.status === 200) {
-          response.clone().json().then((data) => {
-            this.getStore().setItem('access_token', data.access_token);
-            this.getStore().setItem('refresh_token', (data.refresh_token !== undefined ? data.refresh_token : null));
-            this.getStore().setItem('expires_in', data.expires_in);
-            this.getStore().setItem('scope', data.scope);
-            this.getStore().setItem('token_type', data.token_type);
-          });
-        }
-
-        if (response.status !== 200) {
-          window.location.replace(`${this.config.authorization_endpoint}?${this.getQueryString(additionalParams)}`);
-        }
-
-        return response.json()
       });
+      if (response.status === 200) {
+        response.clone().json().then((data) => {
+          this.getStore().setItem('access_token', data.access_token);
+          this.getStore().setItem('refresh_token', (data.refresh_token !== undefined ? data.refresh_token : null));
+          this.getStore().setItem('expires_in', data.expires_in);
+          this.getStore().setItem('scope', data.scope);
+          this.getStore().setItem('token_type', data.token_type);
+        });
+      }
+      if (response.status !== 200) {
+        window.location.replace(`${this.config.authorization_endpoint}?${this.getQueryString(additionalParams)}`);
+      }
+      return response.json();
     });
   }
 
