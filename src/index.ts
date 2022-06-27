@@ -47,7 +47,8 @@ export default class AuthService {
       }).then((response) => {
         if (response.status === 200) {
           response.clone().json().then((data) => {
-            this.getStore().setItem('refresh_token', data.access_token);
+            this.getStore().setItem('access_token', data.access_token);
+            this.getStore().setItem('refresh_token', (data.refresh_token !== undefined ? data.refresh_token : null));
             this.getStore().setItem('expires_in', data.expires_in);
             this.getStore().setItem('scope', data.scope);
             this.getStore().setItem('token_type', data.token_type);
@@ -68,7 +69,11 @@ export default class AuthService {
     }).catch();
   }
 
-  public getToken(): string {
+  public getAccessToken(): string {
+    return this.getStore().getItem('access_token') || null;
+  }
+
+  public getRefreshToken(): string {
     return this.getStore().getItem('refresh_token') || null;
   }
 
