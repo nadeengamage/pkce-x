@@ -22,7 +22,7 @@ export default class AuthService {
   }
 
   public authorize(additionalParams: IObject = {}) {
-    if (this.getCodeFromUrl() === null && this.getToken() === null) {
+    if (this.getCodeFromUrl() === null) {
       window.location.replace(`${this.config.authorization_endpoint}?${this.getQueryString(additionalParams)}`);
     }
   }
