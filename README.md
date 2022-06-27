@@ -36,7 +36,6 @@ const service = new AuthService({
   redirect_uri: 'http://localhost:3000/pkce-demo',
   authorization_endpoint: 'https://example.com/oauth2/authorize',
   token_endpoint: 'https://example.com/oauth2/token',
-  authenticated_url: 'http://localhost:3000/dashboard', Optional. // When authentication is successful, redirect to a different page.
   requested_scopes: '*',
   storage: localStorage, // Optioanl. By default it set to session storage.
   organization: "PKCE-X" // Optioanl.

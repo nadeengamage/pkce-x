@@ -21,13 +21,13 @@ export default class AuthService {
     this.config = config;
   }
 
-  public authorize(additionalParams: IObject = {}) {
+  public async authorize(additionalParams: IObject = {}) {
     if (this.getCodeFromUrl() === null) {
       window.location.replace(`${this.config.authorization_endpoint}?${this.getQueryString(additionalParams)}`);
     }
   }
 
-  public exchange(additionalParams: IObject = {}): Promise<ITokenResponse> {
+  public async exchange(additionalParams: IObject = {}): Promise<ITokenResponse> {
     return this.parseAuthResponseUrl(window.location.href).then((q) => {
       return fetch(this.config.token_endpoint, {
         method: 'POST',
@@ -53,11 +53,6 @@ export default class AuthService {
             this.getStore().setItem('scope', data.scope);
             this.getStore().setItem('token_type', data.token_type);
           });
-
-          // redirect to application url
-          setTimeout(() => {
-            window.location.href = this.config.authenticated_url;
-          }, 2000);
         }
 
         if (response.status !== 200) {
@@ -66,7 +61,7 @@ export default class AuthService {
 
         return response.json()
       });
-    }).catch();
+    });
   }
 
   public getAccessToken(): string {
